@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
 
-    background-color: aquamarine;
+    background-color: rgb(196, 218, 210);
     height: 80vh;
 }
 
@@ -20,8 +20,16 @@ body {
     margin: 10% 0;
     border: 3px solid rgb(233, 128, 128);
     padding: 2%;
+    border-radius: 20%;
 }
 
 button {
     margin-top: 105;
+}
+
+h1,
+h3 {
+    font-weight: 900;
+    text-shadow: 20px solid rgb(102, 81, 81);
+
 }
