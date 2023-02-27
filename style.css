@@ -1,19 +1,14 @@
 body {
     margin: 0;
     padding: 0;
-
+    text-align: center;
     background-color: rgb(196, 218, 210);
-    height: 80vh;
+
 }
 
 .page {
-    height: 80%;
-    margin: 0 50px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2%;
+    width: fit-content;
+    margin: auto
 }
 
 .input_container {
@@ -31,5 +26,43 @@ h1,
 h3 {
     font-weight: 900;
     text-shadow: 20px solid rgb(102, 81, 81);
+}
 
+.reset-btn,
+.notif-btn {
+    cursor: pointer;
+}
+
+.word-div {
+    display: inline-flex;
+}
+
+.word {
+    margin-right: 27px;
+}
+
+
+.disabled {
+    pointer-events: none;
+    background-color: darkgray;
+}
+
+.notif {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fc6c85;
+    width: 20rem;
+    padding: 20px 10px;
+    border-radius: 4px;
+    box-shadow: 3px 3px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.blur {
+    filter: blur(2px);
+}
+
+.hidden {
+    display: none;
 }
