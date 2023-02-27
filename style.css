@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: aquamarine;
+    height: 80vh;
+}
+
+.page {
+    height: 80%;
+    margin: 0 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2%;
+}
+
+.input_container {
+    margin: 10% 0;
+    border: 3px solid rgb(233, 128, 128);
+    padding: 2%;
+}
+
+button {
+    margin-top: 105;
+}
