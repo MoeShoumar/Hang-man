@@ -9,59 +9,32 @@ const notifSpan = document.querySelector('.notif-span');
 const notifBtn = document.querySelector('.notif-btn');
 
 // generate random word and show dashes=letters in the word
-let wordList = ['apple', 'eat', 'horse', 'banana'];
-let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-let displayedWord = '';
-for (let i = 0; i < randomWord.length; i++) {
-    displayedWord += '_ ';
+const words_array = ['horse', 'black', 'king', 'emir', 'eat']
+let random = words_array[Math.floor(Math.random() * words_array.length)];
+console.log(random);
+let dashes = ''
+
+for (let letter of random) {
+    dashes += " _ "
 }
-word_div.innerHTML = displayedWord;
-
-// check input and word
-let livesLeft = 5;
-let correctGuesses = [];
-
-submit.addEventListener('click', function () {
-    let inputLetter = input.value;
-    input.value = '';
-    if (inputLetter.length !== 1) {
-        alert('Please enter only 1 letter');
-        return;
+let num = /[0-9]/
+word_div.innerHTML = dashes
+let updated_dash = ''
+submit.addEventListener('click', () => {
+    if (input.value.length > 1 || input.value == 0 || input.value == '') {
+        alert('please enter 1 letter')
     }
-    if (randomWord.includes(inputLetter)) {
-        for (let i = 0; i < randomWord.length; i++) {
-            if (randomWord[i] === inputLetter) {
-                displayedWord = displayedWord.slice(0, 2 * i) + inputLetter + displayedWord.slice(2 * i + 1);
-                word_div.innerHTML = displayedWord;
+    else if (random.includes(input.value)) {
+        for (let letter of random) {
+            if (letter == input.value) {
+                updated_dash += `${input.value}`
+            } else {
+                updated_dash += `${dashes[letter]}`
             }
+
+            word_div.innerHTML = updated_dash.trim()
         }
-        correctGuesses.push(inputLetter);
-        if (displayedWord.indexOf('_') === -1) {
-            notifContent.textContent = 'You won!';
-            notifSpan.textContent = randomWord;
-            notif.classList.remove('hidden');
-            notif.style.backgroundColor = "green";
-        }
-    } else {
-        livesLeft--;
-        lives.textContent = livesLeft;
-        if (livesLeft === 0) {
-            notifContent.textContent = 'You lost!';
-            notifSpan.textContent = randomWord.toUpperCase();
-            notif.classList.remove('hidden');
-        }
+
     }
-});
-// reset btn
-reset.addEventListener('click', function () {
-    window.location.reload();
-});
-// play again btn
-notifBtn.addEventListener('click', function () {
-    notif.classList.add('hidden');
-    window.location.reload();
-});
-
-
-
+})
 
