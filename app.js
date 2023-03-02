@@ -10,10 +10,11 @@ const notifBtn = document.querySelector('.notif-btn');
 
 // generate random word and show dashes=letters in the word
 const words_array = { word: ['horse', 'black', 'king', 'emir', 'eat'] }
-let random = words_array[Math.floor(Math.random() * words_array.length)];
+let randomIndex = Math.floor(Math.random() * words_array.word.length);
+const random = words_array.word[randomIndex]
 console.log(random);
 let dashes = ''
-
+let livesLeft = 5
 for (let letter of random) {
     dashes += " _ "
 }
@@ -21,7 +22,8 @@ let num = /[0-9]/
 word_div.innerHTML = dashes
 let updated_dash = ''
 submit.addEventListener('click', () => {
-    let lives = 5
+
+    let right_guess = random.length
     if (input.value.length > 1 || input.value == 0 || input.value == '') {
         alert('please enter 1 letter')
     }
@@ -29,6 +31,7 @@ submit.addEventListener('click', () => {
         for (let letter of random) {
             if (letter == input.value) {
                 updated_dash += `${input.value}`
+                right_guess++
             } else {
                 updated_dash += `${dashes[letter]}`
             }
@@ -37,8 +40,20 @@ submit.addEventListener('click', () => {
         }
     }
     else if (!random.includes(input.value)) {
-        lives--
+        livesLeft--
+        lives.textContent = livesLeft;
+        if (livesLeft === 0) {
+            notifContent.textContent = 'You lost!';
+            notifSpan.textContent = random;
+            notif.classList.remove('hidden');
 
+        }
+    }
+    else if (right_guess.length == random.length) {
+        notifContent.textContent = 'You won!';
+        notifSpan.textContent = randomWord;
+        notif.classList.remove('hidden');
+        notif.style.backgroundColor = "green";
     }
 
 }
