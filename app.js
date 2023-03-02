@@ -21,9 +21,10 @@ for (let letter of random) {
 let num = /[0-9]/
 word_div.innerHTML = dashes
 let updated_dash = ''
+let gameStarted = false
 submit.addEventListener('click', () => {
-
-    let right_guess = random.length
+    gameStarted = true
+    let right_guess = 0;
     if (input.value.length > 1 || input.value == 0 || input.value == '') {
         alert('please enter 1 letter')
     }
@@ -58,4 +59,11 @@ submit.addEventListener('click', () => {
 
 }
 )
+reset.addEventListener('click', () => {
+    lives.textContent = livesLeft
+    livesLeft = 5
+    notif.classList.add('hidden')
+    gameStarted = false
+})
+
 
