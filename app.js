@@ -9,7 +9,7 @@ const notifSpan = document.querySelector('.notif-span');
 const notifBtn = document.querySelector('.notif-btn');
 
 // generate random word and show dashes=letters in the word
-const words_array = ['horse', 'black', 'king', 'emir', 'eat']
+const words_array = { word: ['horse', 'black', 'king', 'emir', 'eat'] }
 let random = words_array[Math.floor(Math.random() * words_array.length)];
 console.log(random);
 let dashes = ''
@@ -21,6 +21,7 @@ let num = /[0-9]/
 word_div.innerHTML = dashes
 let updated_dash = ''
 submit.addEventListener('click', () => {
+    let lives = 5
     if (input.value.length > 1 || input.value == 0 || input.value == '') {
         alert('please enter 1 letter')
     }
@@ -34,7 +35,12 @@ submit.addEventListener('click', () => {
 
             word_div.innerHTML = updated_dash.trim()
         }
+    }
+    else if (!random.includes(input.value)) {
+        lives--
 
     }
-})
+
+}
+)
 
