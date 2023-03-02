@@ -24,7 +24,7 @@ word_div.innerHTML = dashes
 let updated_dash = ''
 let gameStarted = false
 let letter_guess = [];
-let right_guess = -1
+let right_guess = 0
 
 // submit event
 submit.addEventListener('click', () => {
@@ -41,14 +41,16 @@ submit.addEventListener('click', () => {
         for (let char of random) {
             if (letter_guess.includes(char)) {
                 updated_dash += `${char}`
-                right_guess++
+                console.log(right_guess);
+                console.log(random.length);
 
             }
             else {
                 updated_dash += "_ ";
             }
-
+            // ChatGPT, I did not know how to think about updating the dashes according to the index of the letter in the random word.
         }
+        right_guess++
         word_div.innerHTML = updated_dash
 
     }
