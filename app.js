@@ -15,32 +15,39 @@ const random = words_array.word[randomIndex]
 console.log(random);
 let dashes = ''
 let livesLeft = 5
-for (let letter of random) {
+for (let char of random) {
     dashes += " _ "
 }
 let num = /[0-9]/
 word_div.innerHTML = dashes
 let updated_dash = ''
 let gameStarted = false
+let letter_guess = [];
+let right_guess = 0
 submit.addEventListener('click', () => {
     gameStarted = true
-    let right_guess = 0;
     if (input.value.length > 1 || input.value == 0 || input.value == '') {
         alert('please enter 1 letter')
     }
+    else if (letter_guess.includes(input.value)) {
+        alert('You gueesed that letter already')
+    }
     else if (random.includes(input.value)) {
-        for (let letter of random) {
-            if (letter == input.value) {
-                updated_dash += `${input.value}`
+        letter_guess.push(input.value)
+        for (let char of random) {
+            if (letter_guess.includes(char)) {
+                updated_dash += `${char}`
                 right_guess++
+
             } else {
-                updated_dash += `${dashes[letter]}`
+                updated_dash += `${dashes[random.indexOf(char)]}`
             }
 
             word_div.innerHTML = updated_dash.trim()
         }
     }
     else if (!random.includes(input.value)) {
+        letter_guess.push(input.value)
         livesLeft--
         lives.textContent = livesLeft;
         if (livesLeft === 0) {
@@ -50,12 +57,13 @@ submit.addEventListener('click', () => {
 
         }
     }
-    else if (right_guess.length == random.length) {
+    else if (right_guess == random.length) {
         notifContent.textContent = 'You won!';
-        notifSpan.textContent = randomWord;
+        notifSpan.textContent = random;
         notif.classList.remove('hidden');
         notif.style.backgroundColor = "green";
     }
+    input.value = ''
 
 }
 )
@@ -64,11 +72,17 @@ reset.addEventListener('click', () => {
     livesLeft = 5
     notif.classList.add('hidden')
     gameStarted = false
+    letter_guess = []
+    updated_dash = ''
+    word_div.innerHTML = dashes
 })
 notifBtn.addEventListener('click', () => {
     lives.textContent = livesLeft
     livesLeft = 5
     notif.classList.add('hidden')
     gameStarted = false
+    letter_guess = []
+    updated_dash = ''
+    word_div.innerHTML = dashes
 })
 
