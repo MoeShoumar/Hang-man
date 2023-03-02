@@ -18,12 +18,15 @@ let livesLeft = 5
 for (let char of random) {
     dashes += "_ "
 }
+// setting up variables
 let num = /[0-9]/
 word_div.innerHTML = dashes
 let updated_dash = ''
 let gameStarted = false
 let letter_guess = [];
 let right_guess = -1
+
+// submit event
 submit.addEventListener('click', () => {
     gameStarted = true
     if (input.value.length > 1 || input.value == 0 || input.value == '') {
@@ -72,6 +75,7 @@ submit.addEventListener('click', () => {
     input.value = ''
 
 });
+// Reset event
 reset.addEventListener('click', () => {
     lives.textContent = livesLeft
     livesLeft = 5
@@ -91,6 +95,7 @@ reset.addEventListener('click', () => {
     right_guess = 0;
 
 })
+// Play again event
 notifBtn.addEventListener('click', () => {
     lives.textContent = livesLeft
     livesLeft = 5
