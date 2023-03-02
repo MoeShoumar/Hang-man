@@ -11,7 +11,7 @@ const notifBtn = document.querySelector('.notif-btn');
 // generate random word and show dashes=letters in the word
 const words_array = { word: ['horse', 'black', 'king', 'emir', 'eat'] }
 let randomIndex = Math.floor(Math.random() * words_array.word.length);
-const random = words_array.word[randomIndex]
+let random = words_array.word[randomIndex]
 console.log(random);
 let dashes = ''
 let livesLeft = 5
@@ -34,6 +34,7 @@ submit.addEventListener('click', () => {
     }
     else if (random.includes(input.value)) {
         letter_guess.push(input.value)
+        updated_dash = ''
         for (let char of random) {
             if (letter_guess.includes(char)) {
                 updated_dash += `${char}`
@@ -44,9 +45,17 @@ submit.addEventListener('click', () => {
             }
 
             word_div.innerHTML = updated_dash.trim()
+
+            if (right_guess == random.length) {
+                notifContent.textContent = 'You won!';
+                notifSpan.textContent = random;
+                notif.classList.remove('hidden');
+                notif.style.backgroundColor = "green";
+            }
         }
     }
-    else if (!random.includes(input.value)) {
+
+    else {
         letter_guess.push(input.value)
         livesLeft--
         lives.textContent = livesLeft;
@@ -57,12 +66,7 @@ submit.addEventListener('click', () => {
 
         }
     }
-    else if (right_guess == random.length) {
-        notifContent.textContent = 'You won!';
-        notifSpan.textContent = random;
-        notif.classList.remove('hidden');
-        notif.style.backgroundColor = "green";
-    }
+
     input.value = ''
 
 }
@@ -75,6 +79,16 @@ reset.addEventListener('click', () => {
     letter_guess = []
     updated_dash = ''
     word_div.innerHTML = dashes
+    randomIndex = Math.floor(Math.random() * words_array.word.length);
+    random = words_array.word[randomIndex];
+    console.log(random);
+    dashes = '';
+    for (let char of random) {
+        dashes += " _ ";
+    }
+    word_div.innerHTML = dashes;
+    right_guess = 0;
+
 })
 notifBtn.addEventListener('click', () => {
     lives.textContent = livesLeft
@@ -84,5 +98,15 @@ notifBtn.addEventListener('click', () => {
     letter_guess = []
     updated_dash = ''
     word_div.innerHTML = dashes
+    randomIndex = Math.floor(Math.random() * words_array.word.length);
+    random = words_array.word[randomIndex];
+    console.log(random);
+    dashes = '';
+    for (let char of random) {
+        dashes += " _ ";
+    }
+    word_div.innerHTML = dashes;
+    right_guess = 0;
+
 })
 
