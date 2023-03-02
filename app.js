@@ -16,14 +16,14 @@ console.log(random);
 let dashes = ''
 let livesLeft = 5
 for (let char of random) {
-    dashes += " _ "
+    dashes += "_ "
 }
 let num = /[0-9]/
 word_div.innerHTML = dashes
 let updated_dash = ''
 let gameStarted = false
 let letter_guess = [];
-let right_guess = 0
+let right_guess = -1
 submit.addEventListener('click', () => {
     gameStarted = true
     if (input.value.length > 1 || input.value == 0 || input.value == '') {
@@ -40,22 +40,24 @@ submit.addEventListener('click', () => {
                 updated_dash += `${char}`
                 right_guess++
 
-            } else {
-                updated_dash += `${dashes[random.indexOf(char)]}`
+            }
+            else {
+                updated_dash += "_ ";
             }
 
-            word_div.innerHTML = updated_dash.trim()
-
-            if (right_guess == random.length) {
-                notifContent.textContent = 'You won!';
-                notifSpan.textContent = random;
-                notif.classList.remove('hidden');
-                notif.style.backgroundColor = "green";
-            }
         }
+        word_div.innerHTML = updated_dash
+
+    }
+    if (right_guess == random.length) {
+        notifContent.textContent = 'You won!';
+        notifSpan.textContent = random;
+        notif.classList.remove('hidden');
+        notif.style.backgroundColor = "green";
     }
 
-    else {
+
+    if (!random.includes(input.value)) {
         letter_guess.push(input.value)
         livesLeft--
         lives.textContent = livesLeft;
@@ -69,8 +71,7 @@ submit.addEventListener('click', () => {
 
     input.value = ''
 
-}
-)
+});
 reset.addEventListener('click', () => {
     lives.textContent = livesLeft
     livesLeft = 5
