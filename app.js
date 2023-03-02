@@ -65,5 +65,10 @@ reset.addEventListener('click', () => {
     notif.classList.add('hidden')
     gameStarted = false
 })
-
+notifBtn.addEventListener('click', () => {
+    lives.textContent = livesLeft
+    livesLeft = 5
+    notif.classList.add('hidden')
+    gameStarted = false
+})
 
